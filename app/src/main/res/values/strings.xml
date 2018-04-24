@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">KotlinAnko</string>
-    <string name="click">点击</string>
+    <string name="edit_title">编辑内容</string>
+    <string name="edit_hint">请输入内容</string>
 </resources>

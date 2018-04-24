@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="edit_title" type="id" />
+    <item name="edit_title_btn" type="id"/>
+    <item name="edit_edit" type="id" />
+
+    <item name="item_list_title" type="id" />
+    <item name="item_list_content" type="id" />
+    <item name="item_list_date" type="id" />
+</resources>
