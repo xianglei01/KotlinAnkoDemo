@@ -2,7 +2,6 @@ package com.demo.leixiang.kotlinanko.edit
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import com.demo.leixiang.kotlinanko.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
@@ -27,7 +26,7 @@ class EditView : AnkoComponent<Context> {
                     id = R.id.edit_title_btn
                     onClick {
                         //提交
-                        Toast.makeText(ui.ctx, "提交", Toast.LENGTH_SHORT).show()
+                        toast("提交")
                     }
                 }.lparams {
                     rightMargin = dip(10)
@@ -43,11 +42,28 @@ class EditView : AnkoComponent<Context> {
             }.lparams(matchParent, dip(45))
 
             editText {
-                id = R.id.edit_edit
+                id = R.id.edit_name
                 textSize = 16f
                 textColorResource = R.color.gray_333333
                 padding = dip(15)
-                hintResource = R.string.edit_hint
+                hintResource = R.string.edit_name_hint
+                backgroundResource = 0
+                maxLines = 1
+                singleLine = true
+            }.lparams(matchParent, wrapContent)
+
+            view {
+                backgroundColorResource = R.color.green_6fff00
+            }.lparams(matchParent, 1) {
+                leftMargin = dip(12)
+            }
+
+            editText {
+                id = R.id.edit_content
+                textSize = 16f
+                textColorResource = R.color.gray_333333
+                padding = dip(15)
+                hintResource = R.string.edit_content_hint
                 backgroundResource = 0
             }.lparams(matchParent, wrapContent)
         }

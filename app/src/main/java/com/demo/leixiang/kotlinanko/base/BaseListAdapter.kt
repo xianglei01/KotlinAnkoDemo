@@ -1,4 +1,4 @@
-package com.demo.leixiang.kotlinanko
+package com.demo.leixiang.kotlinanko.base
 
 import android.content.Context
 import android.view.View
@@ -8,14 +8,9 @@ import android.widget.BaseAdapter
 /**
  * Created by lei.xiang on 2018/4/24.
  */
-open abstract class OwnBaseAdapter<T> : BaseAdapter {
+open abstract class BaseListAdapter<T>(val ctx: Context) : BaseAdapter() {
 
     private var list: List<T>? = null
-    var ctx: Context
-
-    constructor(ctx: Context) {
-        this.ctx = ctx
-    }
 
     abstract override fun getView(position: Int, view: View?, parent: ViewGroup?): View
 
@@ -23,5 +18,5 @@ open abstract class OwnBaseAdapter<T> : BaseAdapter {
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getCount(): Int = 5
+    override fun getCount(): Int = list?.size ?: 0
 }

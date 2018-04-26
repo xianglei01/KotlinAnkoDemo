@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">KotlinAnko</string>
     <string name="edit_title">编辑内容</string>
-    <string name="edit_hint">请输入内容</string>
+    <string name="edit_name_hint">请输入标题（不超过15个字）</string>
+    <string name="edit_content_hint">请输入内容</string>
+    <string name="memorandun_content">吃是warnvow内容你以后万科飞蛾废污染后稍微是还跟我我如果i比服务被复核人我干活是VB刘VB如吧是我围绕是我无不会让</string>
+    <string name="title_activity_demo">DemoActivity</string>
 </resources>
