@@ -12,8 +12,9 @@ abstract class BaseRecycleAdapter<T, E : RecyclerView.ViewHolder>(private var li
 
     private var listener: OnItemClickListener<T>? = null
 
-    open fun setData(list: List<T>) {
+    open fun setData(list: List<T>?) {
         this.list = list
+        notifyDataSetChanged()
     }
 
     fun setOnItemClickListener(action: (Int, T?) -> Unit) {

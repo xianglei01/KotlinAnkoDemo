@@ -6,6 +6,8 @@
     <item name="edit_content" type="id" />
 
     <item name="recycle" type="id" />
+    <item name="home_add" type="id" />
+    <item name="home_add_tv" type="id" />
     <item name="item_list_title" type="id" />
     <item name="item_list_content" type="id" />
     <item name="item_list_date" type="id" />

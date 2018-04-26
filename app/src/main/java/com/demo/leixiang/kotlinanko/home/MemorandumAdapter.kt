@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.demo.leixiang.kotlinanko.base.BaseRecycleAdapter
 import com.demo.leixiang.kotlinanko.R
 import com.demo.leixiang.kotlinanko.data.Memorandum
+import com.demo.leixiang.kotlinanko.utils.DateUtil
 import org.jetbrains.anko.find
 
 /**
@@ -18,7 +19,7 @@ class MemorandumAdapter(private var context: Context, list: List<Memorandum>) : 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, item: Memorandum?) {
         holder.txtTitle?.text = item?.title
         holder.txtContent?.text = item?.content
-        holder.txtDate?.text = item?.date
+        holder.txtDate?.text = DateUtil.millisToDate(item?.date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
