@@ -5,6 +5,7 @@
 
     <item name="recycle" type="id" />
     <item name="item_list_title" type="id" />
+    <item name="item_list_del" type="id" />
     <item name="item_list_content" type="id" />
     <item name="item_list_date" type="id" />
 </resources>

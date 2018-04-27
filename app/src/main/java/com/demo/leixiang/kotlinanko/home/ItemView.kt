@@ -2,6 +2,7 @@ package com.demo.leixiang.kotlinanko.home
 
 import android.content.Context
 import android.text.TextUtils
+import android.view.Gravity
 import android.view.View
 import com.demo.leixiang.kotlinanko.R
 import org.jetbrains.anko.*
@@ -23,6 +24,18 @@ object ItemView {
                     id = R.id.item_list_title
                     textSize = 15f
                     textColorResource = R.color.gray_333333
+                    gravity = Gravity.LEFT
+                    maxLines = 1
+                    ellipsize = TextUtils.TruncateAt.END
+                    singleLine = true
+                }.lparams(matchParent, wrapContent) {
+                    leftOf(R.id.item_list_del)
+                    rightMargin = dip(5)
+                }
+                imageView(R.mipmap.ic_del) {
+                    id = R.id.item_list_del
+                }.lparams {
+                    alignParentRight()
                 }
                 textView("不年假但是词汇量烧开后就及自己奇偶基金才无色差吧变得更积极你分红No猴后已和vow额范文芳范围肠胃访问哥哥范围分为非") {
                     id = R.id.item_list_content

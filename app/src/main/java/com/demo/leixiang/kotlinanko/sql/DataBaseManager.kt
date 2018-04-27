@@ -2,7 +2,7 @@ package com.demo.leixiang.kotlinanko.sql
 
 import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
-import com.demo.leixiang.kotlinanko.listener.QueryCallBack
+import com.demo.leixiang.kotlinanko.listener.CallBack
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_id
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_memorandum_time
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_table_memorandum
@@ -36,12 +36,21 @@ object DataBaseManager {
         DataBaseOpenHelper(ctx).use {
             val list = select(db_table_memorandum).orderBy(db_memorandum_time, SqlOrderDirection.DESC)
                     .parseList(classParser<Memorandum>())
-            val listener = object : QueryCallBack<List<Memorandum>> {
-                override fun onQueryCallBack(data: List<Memorandum>?) {
+            val listener = object : CallBack<List<Memorandum>> {
+                override fun callBack(data: List<Memorandum>?) {
                     action(data)
                 }
             }
-            listener.onQueryCallBack(list)
+            listener.callBack(list)
+        }
+    }
+
+    fun delMemorandum(ctx: Context, memorandum: Memorandum) {
+        DataBaseOpenHelper(ctx).use {
+            delete(db_table_memorandum, "$db_id = ${memorandum.id}")
+//            delete("User", "_id = {userID}", "userID" to 37)
+//            insert(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
+//                    DateBaseConstant.db_memorandum_content to memorandum.content)
         }
     }
 

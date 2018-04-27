@@ -1,21 +1,20 @@
 package com.demo.leixiang.kotlinanko.edit
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import com.demo.leixiang.kotlinanko.R
+import com.demo.leixiang.kotlinanko.base.BaseActivity
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.sql.DataBaseManager
 import org.jetbrains.anko.find
-import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
 
 /**
  * Created by lei.xiang on 2018/4/24.
  */
-class EditActivity : AppCompatActivity(), EditContract.View {
+class EditActivity : BaseActivity(EditView()), EditContract.View {
 
     private lateinit var mEditTitle: EditText
     private lateinit var mEditContent: EditText
@@ -23,16 +22,18 @@ class EditActivity : AppCompatActivity(), EditContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        EditView().setContentView(this)
         supportActionBar?.setTitle(R.string.edit_title)
+    }
+
+    override fun initData() {
+        super.initData()
         var model = intent.getSerializableExtra("Memorandum")
         if (model != null) {
             mMemorandum = model as Memorandum
         }
-        initView()
     }
 
-    private fun initView() {
+    override fun initView() {
         mEditTitle = find(R.id.edit_title)
         mEditContent = find(R.id.edit_content)
         mEditTitle.setText(mMemorandum?.title)

@@ -1,4 +1,4 @@
-package com.demo.leixiang.kotlinanko.base
+package com.demo.leixiang.kotlinanko.base.adapter
 
 import android.support.v7.widget.RecyclerView
 import com.demo.leixiang.kotlinanko.listener.OnItemClickListener

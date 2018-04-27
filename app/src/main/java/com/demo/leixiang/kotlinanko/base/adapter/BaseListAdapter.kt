@@ -1,4 +1,4 @@
-package com.demo.leixiang.kotlinanko.base
+package com.demo.leixiang.kotlinanko.base.adapter
 
 import android.content.Context
 import android.view.View
