@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HomeView().setContentView(this)
+        supportActionBar?.setTitle(R.string.home_title)
         mRecycleView = find(R.id.recycle)
         mRecycleView.layoutManager = LinearLayoutManager(this)
         mAdapter = MemorandumAdapter(this, null)
