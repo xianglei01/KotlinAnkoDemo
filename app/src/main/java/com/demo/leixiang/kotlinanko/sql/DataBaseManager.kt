@@ -3,8 +3,9 @@ package com.demo.leixiang.kotlinanko.sql
 import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.listener.QueryCallBack
-import com.demo.leixiang.kotlinanko.sql.DateBaseContanst.db_memorandum_time
-import com.demo.leixiang.kotlinanko.sql.DateBaseContanst.db_table_memorandum
+import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_id
+import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_memorandum_time
+import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_table_memorandum
 import org.jetbrains.anko.db.*
 
 /**
@@ -12,22 +13,26 @@ import org.jetbrains.anko.db.*
  */
 object DataBaseManager {
 
-    fun insertMemorandum(ctx: Context, time: String, title: String, content: String) {
+    fun insertMemorandum(ctx: Context, memorandum: Memorandum) {
         DataBaseOpenHelper(ctx).use {
-            insert(db_table_memorandum, db_memorandum_time to time, DateBaseContanst.db_memorandum_title to title,
-                    DateBaseContanst.db_memorandum_content to content)
+            insert(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
+                    DateBaseConstant.db_memorandum_content to memorandum.content)
         }
     }
 
-    fun replaceMemorandum(ctx: Context, time: String, title: String, content: String) {
+    fun replaceMemorandum(ctx: Context, memorandum: Memorandum) {
         DataBaseOpenHelper(ctx).use {
-            replace(db_table_memorandum, db_memorandum_time to time, DateBaseContanst.db_memorandum_title to title,
-                    DateBaseContanst.db_memorandum_content to content)
+            if (memorandum.id == 0) {
+                replace(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
+                        DateBaseConstant.db_memorandum_content to memorandum.content)
+            } else {
+                replace(db_table_memorandum, db_id to memorandum.id, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
+                        DateBaseConstant.db_memorandum_content to memorandum.content)
+            }
         }
     }
 
     fun queryMemorandum(ctx: Context, action: (List<Memorandum>?) -> Unit) {
-        System.currentTimeMillis()
         DataBaseOpenHelper(ctx).use {
             val list = select(db_table_memorandum).orderBy(db_memorandum_time, SqlOrderDirection.DESC)
                     .parseList(classParser<Memorandum>())
