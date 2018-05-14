@@ -10,7 +10,7 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
  */
 abstract class BaseRecycleAdapter<T, E : RecyclerView.ViewHolder>(private var list: List<T>?) : RecyclerView.Adapter<E>() {
 
-    private var listener: OnItemClickListener<T>? = null
+    open var listener: OnItemClickListener<T>? = null
 
     open fun setData(list: List<T>?) {
         this.list = list

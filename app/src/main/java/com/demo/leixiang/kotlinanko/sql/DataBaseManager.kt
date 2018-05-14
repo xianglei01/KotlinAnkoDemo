@@ -48,11 +48,7 @@ object DataBaseManager {
     fun delMemorandum(ctx: Context, memorandum: Memorandum) {
         DataBaseOpenHelper(ctx).use {
             delete(db_table_memorandum, "$db_id = ${memorandum.id}")
-//            delete("User", "_id = {userID}", "userID" to 37)
-//            insert(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
-//                    DateBaseConstant.db_memorandum_content to memorandum.content)
         }
     }
-
 
 }

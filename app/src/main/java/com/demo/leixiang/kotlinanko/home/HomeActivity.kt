@@ -1,6 +1,7 @@
 package com.demo.leixiang.kotlinanko.home
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
@@ -21,6 +22,7 @@ class HomeActivity : BaseActivity(HomeView()) {
 
     private lateinit var mRecycleView: RecyclerView
     private lateinit var mAdapter: MemorandumAdapter
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +31,15 @@ class HomeActivity : BaseActivity(HomeView()) {
 
     override fun onResume() {
         super.onResume()
-        query()
+        mSwipeRefreshLayout.post {
+            mSwipeRefreshLayout.isRefreshing = true
+            query()
+        }
     }
 
     override fun initView() {
         super.initView()
+        mSwipeRefreshLayout = find(R.id.swipe_refresh)
         mRecycleView = find(R.id.recycle)
         mRecycleView.layoutManager = LinearLayoutManager(this)
         mAdapter = MemorandumAdapter(this, null)
@@ -49,8 +55,12 @@ class HomeActivity : BaseActivity(HomeView()) {
         mAdapter.setOnDelListener { item ->
             if (item != null) {
                 DataBaseManager.delMemorandum(this, item)
+                mSwipeRefreshLayout.isRefreshing = true
                 query()
             }
+        }
+        mSwipeRefreshLayout.setOnRefreshListener {
+            query()
         }
     }
 
@@ -58,6 +68,7 @@ class HomeActivity : BaseActivity(HomeView()) {
         async(UI) {
             DataBaseManager.queryMemorandum(this@HomeActivity, { list ->
                 mAdapter.setData(list)
+                mSwipeRefreshLayout.isRefreshing = false
             })
         }
     }

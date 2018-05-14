@@ -54,6 +54,8 @@ dependencies {
     // Support-v4 (Anko Layouts)
     implementation "org.jetbrains.anko:anko-support-v4:$anko_version"
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
+
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 }
 repositories {
     mavenCentral()

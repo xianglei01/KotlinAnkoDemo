@@ -3,7 +3,10 @@
     <item name="edit_title" type="id" />
     <item name="edit_content" type="id" />
 
+    <item name="swipe_refresh" type="id" />
     <item name="recycle" type="id" />
+    <item name="item_list_swipe" type="id" />
+    <item name="item_list_content_layout" type="id" />
     <item name="item_list_title" type="id" />
     <item name="item_list_del" type="id" />
     <item name="item_list_content" type="id" />

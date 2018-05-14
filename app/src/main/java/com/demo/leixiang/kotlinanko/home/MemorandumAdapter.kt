@@ -4,8 +4,9 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
+import com.daimajia.swipe.SwipeLayout
 import com.demo.leixiang.kotlinanko.R
 import com.demo.leixiang.kotlinanko.base.adapter.BaseRecycleAdapter
 import com.demo.leixiang.kotlinanko.data.Memorandum
@@ -30,11 +31,15 @@ class MemorandumAdapter(private var context: Context, list: List<Memorandum>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, item: Memorandum?) {
+        holder.swipeLayout?.showMode = SwipeLayout.ShowMode.PullOut
         holder.txtTitle?.text = item?.title
         holder.txtContent?.text = item?.content
         holder.txtDate?.text = DateUtil.millisToDate(item?.time)
         holder.btnDel?.onClick {
             callBack?.callBack(item)
+        }
+        holder.contentLayout?.onClick {
+            listener?.onItemClick(position, item)
         }
     }
 
@@ -43,9 +48,11 @@ class MemorandumAdapter(private var context: Context, list: List<Memorandum>?) :
     }
 
     inner class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+        var swipeLayout = view?.find<SwipeLayout>(R.id.item_list_swipe)
+        var contentLayout = view?.find<RelativeLayout>(R.id.item_list_content_layout)
         var txtTitle = view?.find<TextView>(R.id.item_list_title)
         var txtContent = view?.find<TextView>(R.id.item_list_content)
         var txtDate = view?.find<TextView>(R.id.item_list_date)
-        var btnDel = view?.find<ImageView>(R.id.item_list_del)
+        var btnDel = view?.find<TextView>(R.id.item_list_del)
     }
 }

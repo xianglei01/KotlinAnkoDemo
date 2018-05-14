@@ -7,6 +7,7 @@ import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 /**
  * Created by lei.xiang on 2018/4/24.
@@ -15,9 +16,13 @@ class HomeView : AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View {
         return with(ui) {
-            recyclerView {
-                id = R.id.recycle
-                lparams(matchParent, matchParent)
+            swipeRefreshLayout {
+                id = R.id.swipe_refresh
+                setColorSchemeColors(resources.getColor(R.color.red_ff4d6b))
+                recyclerView {
+                    id = R.id.recycle
+                    lparams(matchParent, matchParent)
+                }
             }
         }
     }
