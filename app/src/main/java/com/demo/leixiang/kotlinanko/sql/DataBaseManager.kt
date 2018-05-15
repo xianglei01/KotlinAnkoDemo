@@ -6,6 +6,8 @@ import com.demo.leixiang.kotlinanko.listener.CallBack
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_id
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_memorandum_time
 import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_table_memorandum
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.db.*
 
 /**
@@ -13,7 +15,7 @@ import org.jetbrains.anko.db.*
  */
 object DataBaseManager {
 
-    fun insertMemorandum(ctx: Context, memorandum: Memorandum) {
+    fun insertMemorandum(ctx: Context, memorandum: Memorandum, action: (Boolean) -> Unit) {
         DataBaseOpenHelper(ctx).use {
             insert(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
                     DateBaseConstant.db_memorandum_content to memorandum.content)
@@ -36,12 +38,14 @@ object DataBaseManager {
         DataBaseOpenHelper(ctx).use {
             val list = select(db_table_memorandum).orderBy(db_memorandum_time, SqlOrderDirection.DESC)
                     .parseList(classParser<Memorandum>())
-            val listener = object : CallBack<List<Memorandum>> {
-                override fun callBack(data: List<Memorandum>?) {
-                    action(data)
+            async(UI) {
+                val listener = object : CallBack<List<Memorandum>> {
+                    override fun callBack(data: List<Memorandum>?) {
+                        action(data)
+                    }
                 }
+                listener.callBack(list)
             }
-            listener.callBack(list)
         }
     }
 

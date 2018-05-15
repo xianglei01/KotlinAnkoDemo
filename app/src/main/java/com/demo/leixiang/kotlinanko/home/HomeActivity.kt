@@ -8,21 +8,20 @@ import android.view.Menu
 import android.view.MenuItem
 import com.demo.leixiang.kotlinanko.R
 import com.demo.leixiang.kotlinanko.base.BaseActivity
+import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.edit.EditActivity
-import com.demo.leixiang.kotlinanko.sql.DataBaseManager
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 /**
  * Created by lei.xiang on 2018/4/24.
  */
-class HomeActivity : BaseActivity(HomeView()) {
+class HomeActivity : BaseActivity(HomeView()), HomeContract.View {
 
     private lateinit var mRecycleView: RecyclerView
     private lateinit var mAdapter: MemorandumAdapter
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var mPresenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +32,7 @@ class HomeActivity : BaseActivity(HomeView()) {
         super.onResume()
         mSwipeRefreshLayout.post {
             mSwipeRefreshLayout.isRefreshing = true
-            query()
+            mPresenter.refreshList(this)
         }
     }
 
@@ -44,6 +43,7 @@ class HomeActivity : BaseActivity(HomeView()) {
         mRecycleView.layoutManager = LinearLayoutManager(this)
         mAdapter = MemorandumAdapter(this, null)
         mRecycleView.adapter = mAdapter
+        mPresenter = HomePresenter(HomeRepository(), this)
     }
 
     override fun initListener() {
@@ -54,22 +54,13 @@ class HomeActivity : BaseActivity(HomeView()) {
         })
         mAdapter.setOnDelListener { item ->
             if (item != null) {
-                DataBaseManager.delMemorandum(this, item)
+                mPresenter.delItem(this, item)
                 mSwipeRefreshLayout.isRefreshing = true
-                query()
+                mPresenter.refreshList(this)
             }
         }
         mSwipeRefreshLayout.setOnRefreshListener {
-            query()
-        }
-    }
-
-    private fun query() {
-        async(UI) {
-            DataBaseManager.queryMemorandum(this@HomeActivity, { list ->
-                mAdapter.setData(list)
-                mSwipeRefreshLayout.isRefreshing = false
-            })
+            mPresenter.refreshList(this)
         }
     }
 
@@ -85,5 +76,10 @@ class HomeActivity : BaseActivity(HomeView()) {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun refreshDone(list: List<Memorandum>?) {
+        mAdapter.setData(list)
+        mSwipeRefreshLayout.isRefreshing = false
     }
 }

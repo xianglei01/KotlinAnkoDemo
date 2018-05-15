@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 /**
  * Created by lei.xiang on 2018/4/24.
  */
-open abstract class BaseListAdapter<T>(val ctx: Context) : BaseAdapter() {
+abstract class BaseListAdapter<T>(val ctx: Context) : BaseAdapter() {
 
     private var list: List<T>? = null
 

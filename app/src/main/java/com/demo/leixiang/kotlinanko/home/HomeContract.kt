@@ -1,4 +1,4 @@
-package com.demo.leixiang.kotlinanko.edit
+package com.demo.leixiang.kotlinanko.home
 
 import android.content.Context
 import com.demo.leixiang.kotlinanko.base.BasePresenter
@@ -6,16 +6,16 @@ import com.demo.leixiang.kotlinanko.base.BaseView
 import com.demo.leixiang.kotlinanko.data.Memorandum
 
 /**
- * Created by lei.xiang on 2018/4/24.
+ * Created by lei.xiang on 2018/5/14.
  */
-class EditContract {
+class HomeContract {
 
     interface View : BaseView {
-        fun finishPage()
-        fun editNull()
+        fun refreshDone(list: List<Memorandum>?)
     }
 
     interface Presenter : BasePresenter {
-        fun saveMemorandum(ctx: Context, memorandum: Memorandum)
+        fun refreshList(ctx: Context)
+        fun delItem(ctx: Context, item: Memorandum)
     }
 }
