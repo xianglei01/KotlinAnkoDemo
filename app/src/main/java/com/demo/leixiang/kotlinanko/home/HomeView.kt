@@ -3,6 +3,7 @@ package com.demo.leixiang.kotlinanko.home
 import android.content.Context
 import android.view.View
 import com.demo.leixiang.kotlinanko.R
+import com.demo.leixiang.kotlinanko.utils.color
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.matchParent
@@ -18,7 +19,7 @@ class HomeView : AnkoComponent<Context> {
         return with(ui) {
             swipeRefreshLayout {
                 id = R.id.swipe_refresh
-                setColorSchemeColors(resources.getColor(R.color.red_ff4d6b))
+                setColorSchemeColors(ui.ctx.color(R.color.red_ff4d6b))
                 recyclerView {
                     id = R.id.recycle
                     lparams(matchParent, matchParent)

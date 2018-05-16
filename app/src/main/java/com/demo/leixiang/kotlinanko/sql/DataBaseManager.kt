@@ -1,11 +1,10 @@
 package com.demo.leixiang.kotlinanko.sql
 
-import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.listener.CallBack
-import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_id
-import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_memorandum_time
-import com.demo.leixiang.kotlinanko.sql.DateBaseConstant.db_table_memorandum
+import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_id
+import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_memorandum_time
+import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_table_memorandum
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.db.*
@@ -15,27 +14,27 @@ import org.jetbrains.anko.db.*
  */
 object DataBaseManager {
 
-    fun insertMemorandum(ctx: Context, memorandum: Memorandum, action: (Boolean) -> Unit) {
-        DataBaseOpenHelper(ctx).use {
-            insert(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
-                    DateBaseConstant.db_memorandum_content to memorandum.content)
+    fun insertMemorandum(memorandum: Memorandum, action: (Boolean) -> Unit) {
+        DataBaseOpenHelper.instance.use {
+            insert(db_table_memorandum, db_memorandum_time to memorandum.time, TABLE_MEMORANDUM.db_memorandum_title to memorandum.title,
+                    TABLE_MEMORANDUM.db_memorandum_content to memorandum.content)
         }
     }
 
-    fun replaceMemorandum(ctx: Context, memorandum: Memorandum) {
-        DataBaseOpenHelper(ctx).use {
+    fun replaceMemorandum(memorandum: Memorandum) {
+        DataBaseOpenHelper.instance.use {
             if (memorandum.id == 0) {
-                replace(db_table_memorandum, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
-                        DateBaseConstant.db_memorandum_content to memorandum.content)
+                replace(db_table_memorandum, db_memorandum_time to memorandum.time, TABLE_MEMORANDUM.db_memorandum_title to memorandum.title,
+                        TABLE_MEMORANDUM.db_memorandum_content to memorandum.content)
             } else {
-                replace(db_table_memorandum, db_id to memorandum.id, db_memorandum_time to memorandum.time, DateBaseConstant.db_memorandum_title to memorandum.title,
-                        DateBaseConstant.db_memorandum_content to memorandum.content)
+                replace(db_table_memorandum, db_id to memorandum.id, db_memorandum_time to memorandum.time, TABLE_MEMORANDUM.db_memorandum_title to memorandum.title,
+                        TABLE_MEMORANDUM.db_memorandum_content to memorandum.content)
             }
         }
     }
 
-    fun queryMemorandum(ctx: Context, action: (List<Memorandum>?) -> Unit) {
-        DataBaseOpenHelper(ctx).use {
+    fun queryMemorandum(action: (List<Memorandum>?) -> Unit) {
+        DataBaseOpenHelper.instance.use {
             val list = select(db_table_memorandum).orderBy(db_memorandum_time, SqlOrderDirection.DESC)
                     .parseList(classParser<Memorandum>())
             async(UI) {
@@ -49,8 +48,8 @@ object DataBaseManager {
         }
     }
 
-    fun delMemorandum(ctx: Context, memorandum: Memorandum) {
-        DataBaseOpenHelper(ctx).use {
+    fun delMemorandum(memorandum: Memorandum) {
+        DataBaseOpenHelper.instance.use {
             delete(db_table_memorandum, "$db_id = ${memorandum.id}")
         }
     }

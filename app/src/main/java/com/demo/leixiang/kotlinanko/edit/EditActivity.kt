@@ -53,7 +53,7 @@ class EditActivity : BaseActivity(EditView()), EditContract.View {
                 mMemorandum.title = title
                 mMemorandum.content = content
                 mMemorandum.time = System.currentTimeMillis().toString()
-                mPresenter.saveMemorandum(this, mMemorandum)
+                mPresenter.saveMemorandum(mMemorandum)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -1,6 +1,5 @@
 package com.demo.leixiang.kotlinanko.home
 
-import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
 
 /**
@@ -8,7 +7,7 @@ import com.demo.leixiang.kotlinanko.data.Memorandum
  */
 interface HomeDataSource {
 
-    fun queryMemorandum(ctx: Context, action: (List<Memorandum>?) -> Unit)
+    fun queryMemorandum(action: (List<Memorandum>?) -> Unit)
 
-    fun delMemorandum(ctx: Context, item: Memorandum)
+    fun delMemorandum(item: Memorandum)
 }

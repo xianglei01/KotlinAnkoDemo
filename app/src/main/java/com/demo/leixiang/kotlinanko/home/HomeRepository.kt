@@ -1,6 +1,5 @@
 package com.demo.leixiang.kotlinanko.home
 
-import android.content.Context
 import android.util.Log
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.listener.CallBack
@@ -11,12 +10,12 @@ import com.demo.leixiang.kotlinanko.sql.DataBaseManager
  */
 class HomeRepository : HomeDataSource {
 
-    override fun delMemorandum(ctx: Context, item: Memorandum) {
-        DataBaseManager.delMemorandum(ctx, item)
+    override fun delMemorandum(item: Memorandum) {
+        DataBaseManager.delMemorandum(item)
     }
 
-    override fun queryMemorandum(ctx: Context, action: (List<Memorandum>?) -> Unit) {
-        DataBaseManager.queryMemorandum(ctx, { list ->
+    override fun queryMemorandum(action: (List<Memorandum>?) -> Unit) {
+        DataBaseManager.queryMemorandum({ list ->
             Log.d("打印===", "list")
             val listener = object : CallBack<List<Memorandum>> {
                 override fun callBack(data: List<Memorandum>?) {

@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity(HomeView()), HomeContract.View {
         super.onResume()
         mSwipeRefreshLayout.post {
             mSwipeRefreshLayout.isRefreshing = true
-            mPresenter.refreshList(this)
+            mPresenter.refreshList()
         }
     }
 
@@ -54,13 +54,13 @@ class HomeActivity : BaseActivity(HomeView()), HomeContract.View {
         })
         mAdapter.setOnDelListener { item ->
             if (item != null) {
-                mPresenter.delItem(this, item)
+                mPresenter.delItem(item)
                 mSwipeRefreshLayout.isRefreshing = true
-                mPresenter.refreshList(this)
+                mPresenter.refreshList()
             }
         }
         mSwipeRefreshLayout.setOnRefreshListener {
-            mPresenter.refreshList(this)
+            mPresenter.refreshList()
         }
     }
 

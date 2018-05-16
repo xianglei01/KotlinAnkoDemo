@@ -1,6 +1,5 @@
 package com.demo.leixiang.kotlinanko.home
 
-import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
 
 /**
@@ -8,13 +7,13 @@ import com.demo.leixiang.kotlinanko.data.Memorandum
  */
 class HomePresenter(private var repository: HomeDataSource, private var view: HomeContract.View) : HomeContract.Presenter {
 
-    override fun refreshList(ctx: Context) {
-        repository.queryMemorandum(ctx, { list ->
+    override fun refreshList() {
+        repository.queryMemorandum({ list ->
             view.refreshDone(list)
         })
     }
 
-    override fun delItem(ctx: Context, item: Memorandum) {
-        repository.delMemorandum(ctx, item)
+    override fun delItem(item: Memorandum) {
+        repository.delMemorandum(item)
     }
 }

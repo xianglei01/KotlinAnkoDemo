@@ -1,6 +1,5 @@
 package com.demo.leixiang.kotlinanko.edit
 
-import android.content.Context
 import com.demo.leixiang.kotlinanko.base.BasePresenter
 import com.demo.leixiang.kotlinanko.base.BaseView
 import com.demo.leixiang.kotlinanko.data.Memorandum
@@ -16,6 +15,6 @@ class EditContract {
     }
 
     interface Presenter : BasePresenter {
-        fun saveMemorandum(ctx: Context, memorandum: Memorandum)
+        fun saveMemorandum(memorandum: Memorandum)
     }
 }

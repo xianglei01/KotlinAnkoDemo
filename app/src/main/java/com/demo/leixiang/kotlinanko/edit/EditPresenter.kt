@@ -1,6 +1,5 @@
 package com.demo.leixiang.kotlinanko.edit
 
-import android.content.Context
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.sql.DataBaseManager
 
@@ -9,10 +8,10 @@ import com.demo.leixiang.kotlinanko.sql.DataBaseManager
  */
 class EditPresenter(private var view: EditContract.View) : EditContract.Presenter {
 
-    override fun saveMemorandum(ctx: Context, memorandum: Memorandum) {
+    override fun saveMemorandum(memorandum: Memorandum) {
         if (memorandum.content.isNotEmpty()) {
             //存储数据关闭页面
-            DataBaseManager.replaceMemorandum(ctx, memorandum)
+            DataBaseManager.replaceMemorandum(memorandum)
             view.finishPage()
         } else {
             view.editNull()
