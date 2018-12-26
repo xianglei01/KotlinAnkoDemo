@@ -11,4 +11,8 @@
     <item name="item_list_del" type="id" />
     <item name="item_list_content" type="id" />
     <item name="item_list_date" type="id" />
+
+    <item name="item_list_name" type="id" />
+    <item name="item_list_num" type="id" />
+    <item name="item_list_done" type="id" />
 </resources>

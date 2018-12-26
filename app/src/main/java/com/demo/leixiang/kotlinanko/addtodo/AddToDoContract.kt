@@ -1,21 +1,20 @@
-package com.demo.leixiang.kotlinanko.home
+package com.demo.leixiang.kotlinanko.addtodo
 
 import com.demo.leixiang.kotlinanko.base.BasePresenter
 import com.demo.leixiang.kotlinanko.base.BaseView
 import com.demo.leixiang.kotlinanko.data.Item
 
 /**
- * Created by lei.xiang on 2018/5/14.
+ * created by xianglei
+ * 2018/12/26 18:31
  */
-class HomeContract {
-
+class AddToDoContract{
     interface View : BaseView {
-        fun refreshDone(list: List<Item>?)
+        fun finishPage()
+        fun editNull()
     }
 
     interface Presenter : BasePresenter {
-        fun refreshList()
-        fun delItem(item: Item)
-        fun changeItem(item: Item)
+        fun saveItem(item: Item)
     }
 }

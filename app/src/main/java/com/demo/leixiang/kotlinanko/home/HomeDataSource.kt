@@ -1,13 +1,16 @@
 package com.demo.leixiang.kotlinanko.home
 
-import com.demo.leixiang.kotlinanko.data.Memorandum
+import com.demo.leixiang.kotlinanko.data.Item
 
 /**
  * Created by lei.xiang on 2018/5/14.
  */
 interface HomeDataSource {
 
-    fun queryMemorandum(action: (List<Memorandum>?) -> Unit)
+    fun queryItem(action: (List<Item>?) -> Unit)
 
-    fun delMemorandum(item: Memorandum)
+    fun delItem(item: Item)
+
+    fun itemDone(item: Item)
+
 }

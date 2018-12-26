@@ -1,6 +1,7 @@
 package com.demo.leixiang.kotlinanko.home
 
 import android.util.Log
+import com.demo.leixiang.kotlinanko.data.Item
 import com.demo.leixiang.kotlinanko.data.Memorandum
 import com.demo.leixiang.kotlinanko.listener.CallBack
 import com.demo.leixiang.kotlinanko.sql.DataBaseManager
@@ -10,19 +11,23 @@ import com.demo.leixiang.kotlinanko.sql.DataBaseManager
  */
 class HomeRepository : HomeDataSource {
 
-    override fun delMemorandum(item: Memorandum) {
-        DataBaseManager.delMemorandum(item)
+    override fun itemDone(item: Item) {
+        DataBaseManager.replaceTodoItem(item)
     }
 
-    override fun queryMemorandum(action: (List<Memorandum>?) -> Unit) {
-        DataBaseManager.queryMemorandum({ list ->
+    override fun delItem(item: Item) {
+        DataBaseManager.delTodoItem(item)
+    }
+
+    override fun queryItem(action: (List<Item>?) -> Unit) {
+        DataBaseManager.queryTodoList { list ->
             Log.d("打印===", "list")
-            val listener = object : CallBack<List<Memorandum>> {
-                override fun callBack(data: List<Memorandum>?) {
+            val listener = object : CallBack<List<Item>> {
+                override fun callBack(data: List<Item>?) {
                     action(data)
                 }
             }
             listener.callBack(list)
-        })
+        }
     }
 }

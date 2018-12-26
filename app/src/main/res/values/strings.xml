@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">KotlinAnko</string>
-    <string name="home_title">备忘录</string>
-    <string name="edit_title">编辑备忘录</string>
+    <string name="home_title">清单</string>
+    <string name="edit_title">编辑清单</string>
     <string name="edit_name_hint">请输入标题（不超过15个字）</string>
     <string name="edit_content_hint">请输入内容</string>
     <string name="memorandum_content">吃是warnvow内容你以后万科飞蛾废污染后稍微是还跟我我如果i比服务被复核人我干活是VB刘VB如吧是我围绕是我无不会让</string>
     <string name="edit_null">请输入内容</string>
     <string name="edit_title_null">无标题</string>
-    <string name="home_add">新建备忘录</string>
+    <string name="home_add">新建清单</string>
     <string name="edit_commit">提交</string>
+    <string name="edit_add_name_hint">请输入名字</string>
+    <string name="edit_add_num_hint">请输入数量</string>
+    <string name="edit_add_null">请输入名字</string>
 </resources>

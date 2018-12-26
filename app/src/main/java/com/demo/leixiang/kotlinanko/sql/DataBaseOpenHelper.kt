@@ -8,6 +8,10 @@ import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_memorandum_content
 import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_memorandum_time
 import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_memorandum_title
 import com.demo.leixiang.kotlinanko.sql.TABLE_MEMORANDUM.db_table_memorandum
+import com.demo.leixiang.kotlinanko.sql.TABLE_TODO.db_table_todo
+import com.demo.leixiang.kotlinanko.sql.TABLE_TODO.db_todo_done
+import com.demo.leixiang.kotlinanko.sql.TABLE_TODO.db_todo_name
+import com.demo.leixiang.kotlinanko.sql.TABLE_TODO.db_todo_num
 import org.jetbrains.anko.db.*
 
 /**
@@ -36,6 +40,9 @@ class DataBaseOpenHelper(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(
                 db_memorandum_time to TEXT,
                 db_memorandum_title to TEXT,
                 db_memorandum_content to TEXT)
+        db.createTable(db_table_todo, true, db_todo_name to TEXT + PRIMARY_KEY + UNIQUE,
+                db_todo_done to BLOB,
+                db_todo_num to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
